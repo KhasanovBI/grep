@@ -16,9 +16,11 @@ public class Main {
         int poolSize = Math.min(Runtime.getRuntime().availableProcessors(), args.length - 1);
         ExecutorService executorService = Executors.newWorkStealingPool(poolSize);
         List<Future<List<String>>> futures = new ArrayList<>();
+        byte[] bytePattern = pattern.getBytes();
+
         for (int i = 1; i < args.length; ++i) {
             String filePath = args[i];
-            futures.add(executorService.submit(new GrepResultCallable(filePath, pattern)));
+            futures.add(executorService.submit(new GrepResultCallable(filePath, bytePattern)));
         }
         executorService.shutdown();
         for (Future<List<String>> future : futures) {
