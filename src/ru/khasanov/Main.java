@@ -26,7 +26,7 @@ public class Main {
         for (Future<List<String>> future : futures) {
             try {
                 for (String resultLine : future.get()) {
-                    System.out.println(resultLine);
+                    System.out.print(resultLine);
                 }
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
